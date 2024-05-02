@@ -1,0 +1,5 @@
+GET http://192.168.0.17:8111/app/rest/buildTypes/id:Template_Build
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: e2cb5158-3f41-4e89-9b9c-f6fd68e65120
+

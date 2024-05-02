@@ -1,0 +1,83 @@
+#### 0 get token
+GET http://192.168.0.17:8111/authenticationTest.html?csrf
+Authorization: Basic admin admin
+Content-Type: application/json
+
+#### 1 create project
+POST http://192.168.0.17:8111/app/rest/projects
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: 53c38364-70b6-4bfd-88db-450a30c73bbc
+
+{
+  "parentProject": {
+    "locator": "_Root"
+  },
+  "name": "project test",
+  "id": "id",
+  "copyAllAssociatedSettings": true
+}
+
+#### 2 create build configuration
+POST http://192.168.0.17:8111/app/rest/buildTypes
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: f3c823d6-0039-4ec5-b92e-526526c912b8
+
+{
+  "id": "id",
+  "name": "Print Hello World",
+  "project": {
+    "id": "id"
+  },
+  "parameters": {
+    "property": [
+      {
+        "name": "myBuildParameter",
+        "value": "myValue"
+      }
+    ]
+  },
+  "steps": {
+    "step": [
+      {
+        "name": "myCommandLineStep",
+        "type": "simpleRunner",
+        "properties": {
+          "property": [
+            {
+              "name": "script.content",
+              "value": "echo 'Hello World!'"
+            },
+            {
+              "name": "teamcity.step.mode",
+              "value": "default"
+            },
+            {
+              "name": "use.custom.script",
+              "value": "true"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+#### 3 run build
+POST http://192.168.0.17:8111/app/rest/buildQueue
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: f3c823d6-0039-4ec5-b92e-526526c912b8
+
+{
+  "buildType": {
+    "id": "id"
+  }
+}
+
+#### 4 check build status
+GET http://192.168.0.17:8111/app/rest/builds?id:105
+Content-Type: application/json
+Accept: application/json
+X-TC-CSRF-Token: d4f7b6b3-fd24-4309-bf32-21658c21c35c
