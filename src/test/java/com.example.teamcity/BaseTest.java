@@ -2,19 +2,18 @@ package com.example.teamcity;
 
 
 import org.assertj.core.api.SoftAssertions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class BaseTest {
 
     protected SoftAssertions softy;
 
-    @BeforeMethod
+    @BeforeEach
     public void beforeTest() {
         softy = new SoftAssertions();
     }
 
-    @AfterMethod
+    @BeforeEach
     public void afterTest() {
         softy.assertAll();
     }

@@ -9,7 +9,7 @@ import com.example.teamcity.api.requests.unchecked.UncheckedProject;
 import com.example.teamcity.api.specs.Specifications;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class RolesTest extends BaseApiTest {
 

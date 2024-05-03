@@ -3,7 +3,7 @@ package com.example.teamcity;
 import com.example.teamcity.api.requests.checked.CheckedProject;
 import com.example.teamcity.api.requests.checked.CheckedUser;
 import com.example.teamcity.api.specs.Specifications;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class BuildConfigurationTest extends BaseApiTest {
