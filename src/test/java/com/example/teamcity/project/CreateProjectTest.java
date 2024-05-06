@@ -155,7 +155,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setId(RandomData.getString(1));
 
-            var project = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject());
+            var project = checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
             softy.assertThat(project.getId()).isEqualTo(testData.getProject().getId());
         }
@@ -166,7 +166,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setId(null);
 
-            var project = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject());
+            var project = checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
             softy.assertThat(project.getId()).isEqualTo(testData.getProject().getName());
         }
@@ -178,7 +178,7 @@ public class CreateProjectTest extends BaseApiTest {
             testData.getProject().setId(null);
             testData.getProject().setName(null);
 
-            new UncheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject())
+            uncheckedWithSuperUser.getProjectRequest().create(testData.getProject())
                     .then().assertThat()
                     .statusCode(HttpStatus.SC_BAD_REQUEST);
         }
@@ -189,7 +189,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setId(RandomData.getString(225));
 
-            var project = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject());
+            var project = checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
             softy.assertThat(project.getId()).isEqualTo(testData.getProject().getId());
         }
@@ -200,7 +200,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setId(RandomData.getString(226));
 
-            new UncheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject())
+            uncheckedWithSuperUser.getProjectRequest().create(testData.getProject())
                     .then().assertThat()
                     .statusCode(HttpStatus.SC_BAD_REQUEST);
             //but actually there is 500 error that would be a bug if we really worked on this project
@@ -212,7 +212,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setId("");
 
-            new UncheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject())
+            uncheckedWithSuperUser.getProjectRequest().create(testData.getProject())
                     .then().assertThat()
                     .statusCode(HttpStatus.SC_BAD_REQUEST);
             //but actually there is 500 error that would be a bug if we really worked on this project
@@ -225,7 +225,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setId(RandomData.getString() + symbol);
 
-            new UncheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject())
+            uncheckedWithSuperUser.getProjectRequest().create(testData.getProject())
                     .then().assertThat()
                     .statusCode(HttpStatus.SC_BAD_REQUEST);
             //but actually there is 500 error that would be a bug if we really worked on this project
@@ -241,7 +241,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setName(RandomData.getString(1));
 
-            var project = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject());
+            var project = checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
             softy.assertThat(project.getId()).isEqualTo(testData.getProject().getId());
             softy.assertThat(project.getName()).isEqualTo(testData.getProject().getName());
@@ -253,7 +253,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setName(RandomData.getString(1000));
 
-            var project = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject());
+            var project = checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
             softy.assertThat(project.getId()).isEqualTo(testData.getProject().getId());
             softy.assertThat(project.getName()).isEqualTo(testData.getProject().getName());
@@ -268,7 +268,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setName(name);
 
-            new UncheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject())
+            uncheckedWithSuperUser.getProjectRequest().create(testData.getProject())
                     .then().assertThat()
                     .statusCode(HttpStatus.SC_BAD_REQUEST);
         }
@@ -279,7 +279,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setName(" ");
 
-            new UncheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject())
+            uncheckedWithSuperUser.getProjectRequest().create(testData.getProject())
                     .then().assertThat()
                     .statusCode(HttpStatus.SC_BAD_REQUEST);
             //but actually there is 500 error that would be a bug if we really worked on this project
@@ -292,7 +292,7 @@ public class CreateProjectTest extends BaseApiTest {
 
             testData.getProject().setName(RandomData.getString() + symbol);
 
-            var project = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testData.getProject());
+            var project = checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
             softy.assertThat(project.getId()).isEqualTo(testData.getProject().getId());
             softy.assertThat(project.getName()).isEqualTo(testData.getProject().getName());
@@ -307,10 +307,10 @@ public class CreateProjectTest extends BaseApiTest {
             var testDataParent = testDataStorage.addTestData();
             var testDataChild = testDataStorage.addTestData();
 
-            var parentProject = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testDataParent.getProject());
+            var parentProject = checkedWithSuperUser.getProjectRequest().create(testDataParent.getProject());
 
             testDataChild.getProject().setParentProject(parentProject);
-            var childProject = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testDataChild.getProject());
+            var childProject = checkedWithSuperUser.getProjectRequest().create(testDataChild.getProject());
 
             softy.assertThat(childProject.getId()).isEqualTo(testDataChild.getProject().getId());
             softy.assertThat(childProject.getParentProjectId()).isEqualTo(testDataParent.getProject().getId());
@@ -322,7 +322,7 @@ public class CreateProjectTest extends BaseApiTest {
             var testDataChild = testDataStorage.addTestData();
 
             testDataChild.getProject().setParentProject(testDataParent.getProject().getParentProject());
-            var childProject = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testDataChild.getProject());
+            var childProject = checkedWithSuperUser.getProjectRequest().create(testDataChild.getProject());
 
             softy.assertThat(childProject.getId()).isEqualTo(testDataChild.getProject().getId());
             softy.assertThat(childProject.getParentProjectId()).isEqualTo("_Root");
@@ -333,7 +333,7 @@ public class CreateProjectTest extends BaseApiTest {
             var testDataChild = testDataStorage.addTestData();
 
             testDataChild.getProject().setParentProject(null);
-            var childProject = new CheckedProject(Specifications.getSpec().superUserSpec()).create(testDataChild.getProject());
+            var childProject = checkedWithSuperUser.getProjectRequest().create(testDataChild.getProject());
 
             softy.assertThat(childProject.getId()).isEqualTo(testDataChild.getProject().getId());
             softy.assertThat(childProject.getParentProjectId()).isEqualTo("_Root");
