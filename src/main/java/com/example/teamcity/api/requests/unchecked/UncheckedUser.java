@@ -34,9 +34,9 @@ public class UncheckedUser extends Request implements CrudInterface {
     }
 
     @Override
-    public Response delete(String id) {
+    public Response delete(String name) {
         return given()
                 .spec(requestSpecification)
-                .delete(USER_ENDPOINT + "/username:" + id);
+                .delete(USER_ENDPOINT + "/username:" + name);
     }
 }

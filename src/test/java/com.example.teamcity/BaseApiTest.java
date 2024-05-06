@@ -6,14 +6,13 @@ import com.example.teamcity.api.requests.AuthSettingsRequest;
 import com.example.teamcity.api.requests.checked.CheckedRequest;
 import com.example.teamcity.api.requests.unchecked.UncheckedRequest;
 import com.example.teamcity.api.specs.Specifications;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 
 public abstract class BaseApiTest extends BaseTest {
 
-    protected TestDataStorage testDataStorage;
+    protected static TestDataStorage testDataStorage;
     protected UncheckedRequest uncheckedWithSuperUser = new UncheckedRequest(Specifications.getSpec().superUserSpec());
     protected CheckedRequest checkedWithSuperUser = new CheckedRequest(Specifications.getSpec().superUserSpec());
 
@@ -24,14 +23,15 @@ public abstract class BaseApiTest extends BaseTest {
         new AuthSettingsRequest(Specifications.getSpec().superUserSpec()).update(authSettings);
     }
 
-    @BeforeEach
-    public void setupTest() {
+    @BeforeAll
+    public static void setupTest() {
         testDataStorage = TestDataStorage.getStorage();
     }
 
-    @AfterEach
-    public void cleanTest() {
-        testDataStorage.delete();
+    @AfterAll
+    public static void cleanTest() {
+        testDataStorage.deleteCreated();
+//        testDataStorage.delete();
     }
 
 }
