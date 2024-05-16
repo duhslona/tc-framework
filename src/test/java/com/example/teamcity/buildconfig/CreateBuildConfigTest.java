@@ -21,7 +21,7 @@ public class CreateBuildConfigTest extends BaseApiTest {
     private TestData testData;
 
     @BeforeEach
-    public void setupProject(){
+    public void setupProject() {
         testData = testDataStorage.addTestData();
         checkedWithSuperUser.getProjectRequest().create(testData.getProject());
         checkedWithSuperUser.getUserRequest().create(testData.getUser());
@@ -34,7 +34,8 @@ public class CreateBuildConfigTest extends BaseApiTest {
             var testData = testDataStorage.addTestData();
             checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
-            testData.getUser().setRoles(TestDataGenerator.generateRoles(Roles.PROJECT_ADMIN, "p:" + testData.getProject().getId()));
+            testData.getUser().setRoles(TestDataGenerator
+                    .generateRoles(Roles.PROJECT_ADMIN, String.format("p:%s", testData.getProject().getId())));
 
             checkedWithSuperUser.getUserRequest().create(testData.getUser());
 
@@ -48,7 +49,8 @@ public class CreateBuildConfigTest extends BaseApiTest {
             var testData = testDataStorage.addTestData();
             checkedWithSuperUser.getProjectRequest().create(testData.getProject());
 
-            testData.getUser().setRoles(TestDataGenerator.generateRoles(Roles.PROJECT_ADMIN, "p:" + testData.getProject().getId()));
+            testData.getUser().setRoles(TestDataGenerator
+                    .generateRoles(Roles.PROJECT_ADMIN, String.format("p:%s", testData.getProject().getId())));
 
             checkedWithSuperUser.getUserRequest().create(testData.getUser());
 
