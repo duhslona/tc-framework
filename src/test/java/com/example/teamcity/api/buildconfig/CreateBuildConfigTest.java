@@ -1,6 +1,6 @@
-package com.example.teamcity.buildconfig;
+package com.example.teamcity.api.buildconfig;
 
-import com.example.teamcity.BaseApiTest;
+import com.example.teamcity.api.BaseApiTest;
 import com.example.teamcity.api.enums.Roles;
 import com.example.teamcity.api.generators.RandomData;
 import com.example.teamcity.api.generators.TestData;
