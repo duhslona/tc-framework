@@ -24,6 +24,10 @@ public class BaseUiTest extends BaseTest {
     }
 
     public void loginAsUser(User user) {
+        new LoginPage().open().login(user);
+    }
+
+    public void createUserAndLogin(User user) {
         new CheckedUser(Specifications.getSpec().superUserSpec()).create(user);
         new LoginPage().open().login(user);
     }

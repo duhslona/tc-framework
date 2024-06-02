@@ -23,5 +23,6 @@ public class LoginPage extends Page {
         usernameInput.sendKeys(user.getUsername());
         passwordInput.sendKeys(user.getPassword());
         submit();
+        waitUntilDataIsSaved();
     }
 }
