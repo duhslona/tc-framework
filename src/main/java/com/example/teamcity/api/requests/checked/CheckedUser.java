@@ -1,5 +1,6 @@
 package com.example.teamcity.api.requests.checked;
 
+import com.example.teamcity.api.generators.TestDataStorage;
 import com.example.teamcity.api.models.User;
 import com.example.teamcity.api.requests.CrudInterface;
 import com.example.teamcity.api.requests.Request;
@@ -16,10 +17,13 @@ public class CheckedUser extends Request implements CrudInterface {
 
     @Override
     public User create(Object user) {
-        return new UncheckedUser(requestSpecification)
+        var createdUser = new UncheckedUser(requestSpecification)
                 .create(user)
                 .then().assertThat().statusCode(HttpStatus.SC_OK)
                 .extract().as(User.class);
+
+        TestDataStorage.getStorage().addCreatedUserName(createdUser.getUsername());
+        return createdUser;
     }
 
     @Override

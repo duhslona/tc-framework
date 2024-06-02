@@ -6,32 +6,32 @@ import com.example.teamcity.api.requests.AuthSettingsRequest;
 import com.example.teamcity.api.requests.checked.CheckedRequest;
 import com.example.teamcity.api.requests.unchecked.UncheckedRequest;
 import com.example.teamcity.api.specs.Specifications;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 
 
 public abstract class BaseApiTest extends BaseTest {
 
-    protected TestDataStorage testDataStorage;
+    protected static TestDataStorage testDataStorage;
     protected UncheckedRequest uncheckedWithSuperUser = new UncheckedRequest(Specifications.getSpec().superUserSpec());
     protected CheckedRequest checkedWithSuperUser = new CheckedRequest(Specifications.getSpec().superUserSpec());
 
-    @BeforeSuite
-    public void activateRoles() {
+    @BeforeAll
+    public static void activateRoles() {
         AuthSettings authSettings = new AuthSettingsRequest(Specifications.getSpec().superUserSpec()).get();
         authSettings.setPerProjectPermissions(true);
         new AuthSettingsRequest(Specifications.getSpec().superUserSpec()).update(authSettings);
     }
 
-    @BeforeMethod
-    public void setupTest() {
+    @BeforeAll
+    public static void setupTest() {
         testDataStorage = TestDataStorage.getStorage();
     }
 
-    @AfterMethod
-    public void cleanTest() {
-        testDataStorage.delete();
+    @AfterAll
+    public static void cleanTest() {
+        testDataStorage.deleteCreated();
+//        testDataStorage.delete();
     }
 
 }
