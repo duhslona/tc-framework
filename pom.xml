@@ -20,7 +20,6 @@
         <assertj-version>3.25.3</assertj-version>
         <slf4j-version>2.0.13</slf4j-version>
         <selenide.version>7.3.2</selenide.version>
-        <awaitility-version>3.0.0</awaitility-version>
     </properties>
 
     <dependencies>
@@ -69,12 +68,6 @@
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.awaitility</groupId>
-            <artifactId>awaitility</artifactId>
-            <version>${awaitility-version}</version>
-        </dependency>
-
     </dependencies>
 
     <build>

@@ -37,12 +37,4 @@ public abstract class Page {
         collection.forEach(webElement -> elements.add(creator.apply(webElement)));
         return elements;
     }
-
-//    public  <T extends PageElement> List<T> generatePageElements(
-//            ElementsCollection collection,
-//            Function<SelenideElement, T> creator) {
-//        var elements = new ArrayList<T>();
-//        collection.forEach(webElement -> elements.add(creator.apply(webElement)));
-//        return elements;
-//    }
 }
