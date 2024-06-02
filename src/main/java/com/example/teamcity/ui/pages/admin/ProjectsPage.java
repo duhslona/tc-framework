@@ -22,7 +22,7 @@ public class ProjectsPage extends FavoritePage {
 
     public ProjectsPage open() {
         Selenide.open(FAVORITE_PROJECTS_URL);
-        waitUntilFavoritePageIsLoaded();
+        waitUntilFavoriteProjectsPageIsLoaded();
         return this;
     }
 

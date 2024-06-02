@@ -27,7 +27,7 @@ public class CreateBuildConfigurationTest extends BaseUiTest {
     }
 
     @Test
-    public void authorizedUserShouldBeAbleCreateNewProject() {
+    public void authorizedUserShouldBeAbleCreateNewBuildConfiguration() {
         loginAsUser(testData.getUser());
 
         new CreateBuildConfigPage()

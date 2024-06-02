@@ -19,7 +19,7 @@ public class CreateNewProjectTest extends BaseUiTest {
                 .createProjectByUrl(url)
                 .setupProject(testData.getProject().getName(), testData.getBuildType().getName());
 
-        new ProjectsPage().getSubprojects()
+        new ProjectsPage().open().getSubprojects()
                 .stream().reduce((first, second) -> second).get()
                 .getHeader().shouldHave(Condition.text(testData.getProject().getName()));
     }
